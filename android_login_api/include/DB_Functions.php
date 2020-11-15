@@ -1,5 +1,8 @@
 <?php
  
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
  
 class DB_Functions {
@@ -29,7 +32,7 @@ class DB_Functions {
         $encrypted_password = $hash["encrypted"]; // encrypted password
         $salt = $hash["salt"]; // salt
  
-        $stmt = $this->conn->prepare("INSERT INTO users(unique_id, name, email, encrypted_password, address, phone,  salt, created_at) VALUES(?, ?, ?, ?, ?, ?, ?, NOW())");
+        $stmt = $this->conn->prepare("INSERT INTO users(unique_id, name, email, encrypted_password,address, phone, salt, created_at) VALUES(?, ?, ?, ?, ?, ?, ?, NOW())");
         $stmt->bind_param("sssssss", $uuid, $name, $email, $encrypted_password, $address, $phone, $salt);
         $result = $stmt->execute();
         $stmt->close();
